@@ -5,6 +5,7 @@ __pycache__/
 ckpts/
 data/
 output/
+logs/
 
 # C extensions
 *.so

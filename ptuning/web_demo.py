@@ -128,6 +128,7 @@ def main():
     else:
         model_args = parser.parse_args_into_dataclasses()[0]
 
+    print(model_args.model_name_or_path)
     tokenizer = AutoTokenizer.from_pretrained(
         model_args.model_name_or_path, trust_remote_code=True)
     config = AutoConfig.from_pretrained(
@@ -146,6 +147,7 @@ def main():
                 new_prefix_state_dict[k[len("transformer.prefix_encoder."):]] = v
         model.transformer.prefix_encoder.load_state_dict(new_prefix_state_dict)
     else:
+        print("Loading from model checkpoint")
         model = AutoModel.from_pretrained(model_args.model_name_or_path, config=config, trust_remote_code=True)
 
     if model_args.quantization_bit is not None:
